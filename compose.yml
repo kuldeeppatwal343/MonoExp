@@ -1,0 +1,15 @@
+services:
+  fe:
+    build:
+      context: ./FE
+      dockerfile: Dockerfile.dev
+    ports:
+      - "${FE_PORT:-8082}:8082"
+    environment:
+      VITE_API_TARGET: http://be:8080
+    depends_on:
+      - be
+  be:
+    build: ./BE
+    ports:
+      - "8080:8080"
